@@ -1,31 +1,29 @@
-name: Build and Deploy to Azure
+name: Build and Deploy Next.js App to Azure App Service
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '20.x'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Build Next.js
+      - name: Build Project
         run: npm run build
-
-      - name: Archive production build
-        run: zip -r build.zip out
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
@@ -33,4 +31,4 @@ jobs:
           app-name: 'webpribadidiva'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: build.zip
+          package: './out'
