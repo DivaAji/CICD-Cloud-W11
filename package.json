@@ -4,15 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "/home/site/wwwroot/node_modules/next/dist/bin/next",
-    "startLocal" : "next start",
+    "build": "next build && next export",
+    "start": "npx serve out",
     "lint": "next lint"
   },
   "dependencies": {
     "next": "15.3.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "serve": "^14.2.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
