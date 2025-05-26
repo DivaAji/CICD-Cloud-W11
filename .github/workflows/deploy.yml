@@ -1,4 +1,4 @@
-name: Build and deploy Next.js app to Azure Web App - nextjs-febi-app
+name: Deploy webpribadidiva
 
 on:
   push:
