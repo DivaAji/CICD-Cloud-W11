@@ -6,7 +6,7 @@ export default function Home() {
         Ini adalah web pribadi sederhana yang dibuat dengan Next.js dan Tailwind CSS.
       </p>
       <p className="mt-4 text-lg text-gray-700 text-center">
-        CI/CD Week 11 Cloud Computing
+        CI/CD Week 12 Cloud Computing
       </p>
       <a
         href="#kontak"
