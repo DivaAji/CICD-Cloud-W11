@@ -34,6 +34,7 @@ jobs:
           cp -r .next/standalone/. site/
           cp -r .next/static site/.next/
           cp -r public site/public || true
+          cp -r styles site/styles
 
       - name: Azure Login
         uses: azure/login@v2
