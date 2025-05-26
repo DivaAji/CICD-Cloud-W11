@@ -5,6 +5,9 @@ export default function Home() {
       <p className="mt-4 text-lg text-gray-700 text-center">
         Ini adalah web pribadi sederhana yang dibuat dengan Next.js dan Tailwind CSS.
       </p>
+      <p className="mt-4 text-lg text-gray-700 text-center">
+        CI/CD Week 11 Cloud Computing
+      </p>
       <a
         href="#kontak"
         className="mt-6 px-6 py-2 bg-purple-500 text-white rounded-xl hover:bg-purple-600 transition"
