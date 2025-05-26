@@ -1,33 +1,48 @@
-name: Deploy to Azure
+name: Build and deploy Next.js app to Azure Web App
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '20.x'
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: Build Next.js app
         run: npm run build
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
+      - name: Prepare deployment package
+        run: |
+          mkdir -p site
+          cp -r .next/standalone/. site/
+          cp -r .next/static site/.next/
+          cp -r public site/public || true
+
+      - name: Azure Login
+        uses: azure/login@v2
         with:
-          app-name: webpribadidiva
-          slot-name: production
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'webpribadidiva'
+          slot-name: 'Production'
+          package: site
